@@ -107,13 +107,12 @@
     async function loadBrochures() {
       const grid = document.getElementById('repo-grid');
       try {
-        // GitHub API를 통해 조직의 레포지토리 목록을 가져옵니다.
-        const res = await fetch('https://api.github.com/orgs/pnu-ai-center/repos?sort=updated&per_page=100');
+        const res = await fetch('https://api.github.com/orgs/pnuai/repos?sort=updated&per_page=100');
         if (!res.ok) throw new Error('데이터를 불러오지 못했습니다.');
         const repos = await res.json();
         
-        // pnu-ai-center.github.io 자체는 제외하고 최신순으로 정렬
-        const brochures = repos.filter(r => r.name !== 'pnu-ai-center.github.io');
+        // pnuai.github.io 자체는 제외하고 최신순으로 정렬
+        const brochures = repos.filter(r => r.name !== 'pnuai.github.io');
 
         if (brochures.length === 0) {
           grid.innerHTML = '<div style="color:var(--gray-500); grid-column: 1/-1;">아직 등록된 브로슈어가 없습니다.</div>';

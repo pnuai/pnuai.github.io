@@ -148,24 +148,49 @@
   </header>
 
   <div class="container">
-    <div class="grid">
-      <!-- 1번 브로슈어 -->
-      <a href="/2026-ai-guidebook/" class="card">
-        <span class="card-year">2026</span>
-        <h2 class="card-title">AI 교육 안내서</h2>
-        <p class="card-desc">부산대학교 AI융합교육원의 교육 비전, 교육과정, 교수진 및 지원 절차를 안내합니다.</p>
-        <div class="card-arrow">브로슈어 보기</div>
-      </a>
-
-      <!-- 예시 브로슈어 (아직 레포를 만들지 않았다면 링크를 비워두거나 준비중으로 표시) -->
-      <a href="#" class="card" style="opacity: 0.6;">
-        <span class="card-year">2027</span>
-        <h2 class="card-title">AI 해커톤 안내 (예시)</h2>
-        <p class="card-desc">하반기 AI 해커톤 대회 규정, 시상 내역 및 참가 방법 안내 브로슈어입니다.</p>
-        <div class="card-arrow" style="color:var(--gray-600)">준비 중</div>
-      </a>
+    <div class="grid" id="repo-grid">
+      <div style="text-align:center; color:var(--gray-500); grid-column: 1/-1;">
+        조직에 등록된 브로슈어를 불러오는 중입니다...
+      </div>
     </div>
   </div>
+
+  <script>
+    async function loadBrochures() {
+      const grid = document.getElementById('repo-grid');
+      try {
+        // GitHub API를 통해 조직의 레포지토리 목록을 가져옵니다.
+        const res = await fetch('https://api.github.com/orgs/pnu-ai-center/repos?sort=updated&per_page=100');
+        if (!res.ok) throw new Error('데이터를 불러오지 못했습니다.');
+        const repos = await res.json();
+        
+        // pnu-ai-center.github.io 자체는 제외하고 최신순으로 정렬
+        const brochures = repos.filter(r => r.name !== 'pnu-ai-center.github.io');
+
+        if (brochures.length === 0) {
+          grid.innerHTML = '<div style="color:var(--gray-500); grid-column: 1/-1;">아직 등록된 브로슈어가 없습니다.</div>';
+          return;
+        }
+
+        grid.innerHTML = brochures.map(repo => {
+          const year = new Date(repo.updated_at).getFullYear();
+          const title = repo.name.replace(/-/g, ' ').toUpperCase();
+          return `
+            <a href="/${repo.name}/" class="card">
+              <span class="card-year">${year}</span>
+              <h2 class="card-title">${repo.name}</h2>
+              <p class="card-desc">${repo.description || '이 브로슈어에 대한 설명이 없습니다.'}</p>
+              <div class="card-arrow">브로슈어 보기</div>
+            </a>
+          `;
+        }).join('');
+      } catch (e) {
+        grid.innerHTML = `<div style="color:var(--red); grid-column: 1/-1;">오류가 발생했습니다: ${e.message}</div>`;
+      }
+    }
+
+    loadBrochures();
+  </script>
 
 </body>
 </html>

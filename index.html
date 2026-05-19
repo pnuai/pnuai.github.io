@@ -3,104 +3,506 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>부산대학교 AI융합교육원 브로슈어 허브</title>
+  <title>부산대학교 AI융합교육원 온라인 브로슈어 허브</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --navy:#0a2463;--blue:#1a4fa0;--mid:#2563eb;--light:#60a5fa;--pale:#dbeafe;
-      --gold:#f59e0b;--gold2:#fbbf24;--green:#10b981;--teal:#0ea5e9;
-      --bg:#f0f4f8;--card:#ffffff;--text:#1e293b;--sub:#64748b;--bdr:#e2e8f0;
+    :root {
+      --primary: #1565c0;
+      --primary-dark: #0d47a1;
+      --primary-light: #1e88e5;
+      --accent: #f59e0b;
+      --accent-light: #fbbf24;
+      --navy: #1a3a6e;
+      --navy-dark: #0a192f;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #334155;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --border-accent: #dce8f8;
+      --glow: rgba(21, 101, 192, 0.08);
+      --font-primary: 'Outfit', 'Noto Sans KR', sans-serif;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
-         background:var(--bg);color:var(--text);line-height:1.65;
-         display:flex;flex-direction:column;min-height:100vh}
 
-    /* NAV */
-    nav{background:var(--navy);padding:0 32px;height:60px;display:flex;align-items:center;
-        justify-content:space-between;position:sticky;top:0;z-index:100;
-        box-shadow:0 2px 12px rgba(0,0,0,.3)}
-    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-    .nav-brand .lb{background:linear-gradient(135deg,var(--gold),#d97706);width:30px;height:30px;
-                    border-radius:7px;display:flex;align-items:center;justify-content:center;
-                    font-weight:900;font-size:12px;color:white}
-    .nav-brand .bt{color:white;font-weight:800;font-size:16px;letter-spacing:-0.5px}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    /* HERO */
-    .hero{background:linear-gradient(145deg,#040d1a 0%,#0a1e3f 40%,#1a4fa0 80%,#0c4a6e 100%);
-          padding:90px 40px 80px;text-align:center;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;inset:0;
-                   background:radial-gradient(ellipse 70% 60% at 50% 110%,
-                   rgba(99,102,241,.25) 0%,transparent 60%)}
-    .hero-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
-    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;
-                   background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.35);
-                   border-radius:20px;padding:6px 18px;font-size:13px;color:var(--gold2);
-                   font-weight:700;letter-spacing:.5px;margin-bottom:24px}
-    .hero-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--gold2);
-                        animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-    .hero h1{font-size:52px;font-weight:900;color:white;letter-spacing:-1.5px;
-              margin-bottom:16px;line-height:1.2}
-    .hero h1 .arise{background:linear-gradient(135deg,#f59e0b,#fcd34d);
-                     -webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .hero-sub{font-size:17px;color:rgba(255,255,255,.75);line-height:1.8;max-width:600px;margin:0 auto}
+    html, body {
+      font-family: var(--font-primary);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-    /* Container & Grid */
-    .container{max-width:1060px;margin:0 auto;padding:0 24px}
-    .section{padding:56px 0}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-top:28px}
+    /* NAVIGATION */
+    nav {
+      background: rgba(26, 58, 110, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
 
-    /* Cards */
-    .card{background:var(--card);border:1px solid var(--bdr);border-radius:16px;
-          overflow:hidden;transition:box-shadow .2s,transform .2s;
-          text-decoration:none;color:inherit;display:flex;flex-direction:column;
-          padding:32px;position:relative}
-    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;
-                  background:linear-gradient(90deg,var(--blue),var(--teal));
-                  transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
-    .card:hover{box-shadow:0 12px 36px rgba(0,0,0,.08);transform:translateY(-4px);border-color:var(--light)}
-    .card:hover::before{transform:scaleX(1)}
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
 
-    .card-year{display:inline-block;font-size:12px;font-weight:800;color:var(--blue);
-               background:var(--pale);padding:4px 10px;border-radius:6px;margin-bottom:14px;letter-spacing:0.5px}
-    .card-title{font-size:20px;font-weight:800;line-height:1.4;margin-bottom:10px;color:var(--navy)}
-    .card-desc{font-size:14px;color:var(--sub);line-height:1.7;flex:1;margin-bottom:24px}
-    
-    .card-foot{display:flex;align-items:center;justify-content:space-between;
-               padding-top:16px;border-top:1px solid var(--bdr)}
-    .card-arrow{font-size:13px;font-weight:800;color:var(--mid);display:flex;align-items:center;gap:6px}
-    .card-arrow::after{content:'→';transition:transform .2s ease}
-    .card:hover .card-arrow::after{transform:translateX(4px)}
+    .nav-logo {
+      background: linear-gradient(135deg, var(--accent), #d97706);
+      color: white;
+      font-weight: 900;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(245, 158, 11, 0.3);
+    }
 
-    @media(max-width:600px){.hero h1{font-size:36px}}
+    .nav-title {
+      color: white;
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
 
-    /* NAV BUTTONS */
     .nav-btn {
       text-decoration: none;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 700;
       color: white;
-      background: rgba(255,255,255,0.1);
-      padding: 6px 16px;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 8px 18px;
       border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.2);
-      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-btn:hover {
+      background: white;
+      color: var(--navy);
+      border-color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25);
+    }
+
+    .nav-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #0d47a1 0%, #1565c0 40%, #1e88e5 75%, #0d47a1 100%);
+      padding: 96px 10% 84px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decor Glow Elements */
+    .hero-glow-1 {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      top: -200px;
+      right: -60px;
+      border-radius: 50%;
+      background: #90caf9;
+      opacity: 0.16;
+      filter: blur(90px);
+      pointer-events: none;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      bottom: -120px;
+      left: -40px;
+      border-radius: 50%;
+      background: #64b5f6;
+      opacity: 0.14;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      padding: 5px 14px;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 20px;
+      background: rgba(245, 158, 11, 0.08);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-light);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      margin-bottom: 18px;
+      word-break: keep-all;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent-light), #ffd54f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 0;
+      max-width: 640px;
+      word-break: keep-all;
+    }
+
+    /* SEARCH SECTION */
+    .search-section {
+      margin-top: -30px;
+      position: relative;
+      z-index: 10;
+      padding: 0 10%;
+    }
+
+    .search-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .search-wrapper svg {
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+      margin-right: 12px;
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 15px;
+      color: var(--text);
+      font-family: var(--font-primary);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+      opacity: 0.8;
+    }
+
+    /* MAIN CONTAINER & GRID */
+    main {
+      flex: 1;
+      padding: 56px 10%;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .section-title-wrapper .category {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #5b8ad4;
+      margin-bottom: 6px;
+    }
+
+    .section-title-wrapper .title {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .count-badge {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--border-accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    /* CARD STYLE */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-accent);
+      border-top: 4px solid var(--primary-light);
+      border-radius: 14px;
+      padding: 28px 24px;
+      box-shadow: 0 2px 12px var(--glow);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(21, 101, 192, 0.15);
+      border-color: var(--primary-light);
+    }
+
+    .card-top {
+      margin-bottom: 20px;
+    }
+
+    .card-year {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      color: var(--primary-dark);
+      background: rgba(21, 101, 192, 0.08);
+      padding: 3px 9px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.4;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      word-break: break-all;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    .card-foot {
       display: flex;
       align-items: center;
       gap: 6px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary-light);
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid rgba(226, 232, 240, 0.6);
+      transition: color 0.2s ease;
     }
-    .nav-btn:hover {
-      background: rgba(255,255,255,0.2);
-      border-color: var(--gold2);
-      color: var(--gold2);
-      transform: translateY(-1px);
+
+    .card-foot::after {
+      content: '→';
+      transition: transform 0.2s ease;
     }
-    .nav-btn svg {
-      width: 14px;
-      height: 14px;
+
+    .card:hover .card-foot {
+      color: var(--primary-dark);
+    }
+
+    .card:hover .card-foot::after {
+      transform: translateX(4px);
+    }
+
+    /* Skeleton Loading */
+    .skeleton {
+      background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-accent);
+      border-top: 4px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      box-shadow: 0 2px 12px var(--glow);
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* FOOTER STATS PANEL */
+    .stats-banner {
+      margin: 0 10% 56px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 20px;
+      padding: 40px 56px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(21, 101, 192, 0.2);
+    }
+
+    .stats-banner-glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      top: -100px;
+      right: -60px;
+      border-radius: 50%;
+      background: #90caf9;
+      opacity: 0.14;
+      filter: blur(70px);
+      pointer-events: none;
+    }
+
+    .stat-item {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat-item:not(:last-child) {
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 4px;
+    }
+
+    .stat-sub {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    footer {
+      background: var(--navy-dark);
+      padding: 24px 10%;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer p {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    @media (max-width: 900px) {
+      .stats-banner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+      .stat-item:nth-child(2) {
+        border-right: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 64px 6% 56px;
+      }
+      main {
+        padding: 36px 6%;
+      }
+      .stats-banner {
+        grid-template-columns: 1fr;
+        padding: 32px 24px;
+        margin: 0 6% 36px;
+      }
+      .stat-item {
+        border-right: none !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        padding-bottom: 16px;
+      }
+      .stat-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
     }
   </style>
 </head>
@@ -108,68 +510,180 @@
 
   <nav>
     <a href="#" class="nav-brand">
-      <div class="lb">AI</div>
-      <div class="bt">부산대학교 AI융합교육원</div>
+      <div class="nav-logo">AI</div>
+      <div class="nav-title">부산대학교 AI융합교육원</div>
     </a>
-    <div class="nav-actions">
+    <div>
       <a href="/pnu-slate/admin/" class="nav-btn" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-        관리 페이지
+        관리자 페이지
       </a>
     </div>
   </nav>
 
   <header class="hero">
-    <div class="hero-inner">
-      <div class="hero-eyebrow"><div class="dot"></div> ONLINE HUB</div>
-      <h1>온라인 <span class="arise">브로슈어 허브</span></h1>
-      <p class="hero-sub">부산대학교 AI융합교육원의 다양한 교육과정과 사업 안내를 세련된 온라인 브로슈어로 확인하세요.</p>
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="dot"></div> ONLINE HUB
+      </div>
+      <h1>온라인 <span>브로슈어 허브</span></h1>
+      <p class="hero-desc">부산대학교 AI융합교육원의 다양한 교육과정 및 혁신 사업 안내서를 세련된 온라인 인터랙티브 브로슈어로 열람하세요.</p>
     </div>
   </header>
 
-  <div class="container">
+  <section class="search-section">
+    <div class="search-wrapper">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="search-input" class="search-input" placeholder="브로슈어 이름 또는 설명 검색..." oninput="filterBrochures()">
+    </div>
+  </section>
+
+  <main>
+    <div class="section-header">
+      <div class="section-title-wrapper">
+        <div class="category">Brochures</div>
+        <div class="title">사업 브로슈어 리스트</div>
+      </div>
+      <div class="count-badge" id="count-badge">로드 중...</div>
+    </div>
+
     <div class="grid" id="repo-grid">
-      <div style="text-align:center; color:var(--gray-500); grid-column: 1/-1;">
-        조직에 등록된 브로슈어를 불러오는 중입니다...
+      <!-- Skeletons shown during load -->
+      <div class="skeleton-card">
+        <div>
+          <div class="skeleton" style="width: 70px; height: 18px; margin-bottom: 14px;"></div>
+          <div class="skeleton" style="width: 100%; height: 24px; margin-bottom: 10px;"></div>
+          <div class="skeleton" style="width: 85%; height: 16px; margin-bottom: 6px;"></div>
+          <div class="skeleton" style="width: 60%; height: 16px;"></div>
+        </div>
+        <div class="skeleton" style="width: 90px; height: 18px; margin-top: 18px;"></div>
+      </div>
+      <div class="skeleton-card">
+        <div>
+          <div class="skeleton" style="width: 70px; height: 18px; margin-bottom: 14px;"></div>
+          <div class="skeleton" style="width: 100%; height: 24px; margin-bottom: 10px;"></div>
+          <div class="skeleton" style="width: 80%; height: 16px; margin-bottom: 6px;"></div>
+          <div class="skeleton" style="width: 70%; height: 16px;"></div>
+        </div>
+        <div class="skeleton" style="width: 90px; height: 18px; margin-top: 18px;"></div>
+      </div>
+      <div class="skeleton-card">
+        <div>
+          <div class="skeleton" style="width: 70px; height: 18px; margin-bottom: 14px;"></div>
+          <div class="skeleton" style="width: 100%; height: 24px; margin-bottom: 10px;"></div>
+          <div class="skeleton" style="width: 90%; height: 16px; margin-bottom: 6px;"></div>
+          <div class="skeleton" style="width: 50%; height: 16px;"></div>
+        </div>
+        <div class="skeleton" style="width: 90px; height: 18px; margin-top: 18px;"></div>
       </div>
     </div>
-  </div>
+  </main>
+
+  <section class="stats-banner">
+    <div class="stats-banner-glow"></div>
+    <div class="stat-item">
+      <div class="stat-value">192명</div>
+      <div class="stat-label">SW학과 정원</div>
+      <div class="stat-sub">2019년 대비 43% 증원</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">8개</div>
+      <div class="stat-label">전공 특화 트랙</div>
+      <div class="stat-sub">클라우드·보안·IoT 등</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">14개</div>
+      <div class="stat-label">SW-X 융합트랙</div>
+      <div class="stat-sub">전 학문 분야 융합 운영</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">21,302㎡</div>
+      <div class="stat-label">전용 교육 시설</div>
+      <div class="stat-sub">IT관·경암공학관 신축</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Pusan National University AI Convergence Education Institute. All Rights Reserved.</p>
+  </footer>
 
   <script>
+    let cachedBrochures = [];
+    const colors = [
+      '#1e88e5', // Light Blue
+      '#1565c0', // Primary Blue
+      '#1a3a6e', // Navy
+      '#0ea5e9', // Teal
+      '#0d47a1'  // Dark Blue
+    ];
+
     async function loadBrochures() {
       const grid = document.getElementById('repo-grid');
+      const badge = document.getElementById('count-badge');
       try {
         const res = await fetch('https://api.github.com/orgs/pnuai/repos?sort=updated&per_page=100');
         if (!res.ok) throw new Error('데이터를 불러오지 못했습니다.');
         const repos = await res.json();
         
-        // pnuai.github.io 자체는 제외하고 최신순으로 정렬
-        const brochures = repos.filter(r => r.name !== 'pnuai.github.io');
+        // pnuai.github.io 자체 및 비공개나 관련 없는 항목 필터링 (메인 설정 제외)
+        cachedBrochures = repos.filter(r => r.name !== 'pnuai.github.io' && r.name !== 'hub-page');
 
-        if (brochures.length === 0) {
-          grid.innerHTML = '<div style="color:var(--gray-500); grid-column: 1/-1;">아직 등록된 브로슈어가 없습니다.</div>';
-          return;
-        }
-
-        grid.innerHTML = brochures.map(repo => {
-          const year = new Date(repo.updated_at).getFullYear();
-          const title = repo.name.replace(/-/g, ' ').toUpperCase();
-          return `
-            <a href="/${repo.name}/" class="card">
-              <div>
-                <span class="card-year">${year} YEAR</span>
-                <h2 class="card-title">${repo.name}</h2>
-                <p class="card-desc">${repo.description || '이 브로슈어에 대한 설명이 없습니다. 관리자 페이지에서 설명을 수정할 수 있습니다.'}</p>
-              </div>
-              <div class="card-foot">
-                <span class="card-arrow">브로슈어 열기</span>
-              </div>
-            </a>
-          `;
-        }).join('');
+        renderBrochures(cachedBrochures);
       } catch (e) {
-        grid.innerHTML = `<div style="color:var(--red); grid-column: 1/-1;">오류가 발생했습니다: ${e.message}</div>`;
+        grid.innerHTML = `<div style="color:var(--accent); text-align:center; grid-column: 1/-1; font-weight:700;">오류가 발생했습니다: ${e.message}</div>`;
+        badge.textContent = '오류';
       }
+    }
+
+    function renderBrochures(list) {
+      const grid = document.getElementById('repo-grid');
+      const badge = document.getElementById('count-badge');
+      
+      badge.textContent = `총 ${list.length}개`;
+
+      if (list.length === 0) {
+        grid.innerHTML = '<div style="color:var(--text-muted); text-align:center; grid-column: 1/-1; padding: 40px 0;">검색 결과 또는 등록된 브로슈어가 없습니다.</div>';
+        return;
+      }
+
+      grid.innerHTML = list.map((repo, index) => {
+        const year = new Date(repo.updated_at).getFullYear();
+        const color = colors[index % colors.length];
+        
+        // 레포 명칭 이쁘게 포맷팅 (예: pnu-slate -> PNU SLATE)
+        const displayTitle = repo.name.replace(/-/g, ' ').toUpperCase();
+        
+        return `
+          <a href="/${repo.name}/" class="card" style="border-top-color: ${color}">
+            <div class="card-top">
+              <span class="card-year" style="color: ${color}; background: ${color}14">${year} YEAR</span>
+              <h2 class="card-title">${displayTitle}</h2>
+              <p class="card-desc">${repo.description || '부산대학교 SW중심대학 사업 성과를 수록한 세련된 인터랙티브 온라인 브로슈어입니다.'}</p>
+            </div>
+            <div class="card-foot" style="color: ${color}">
+              브로슈어 열기
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    function filterBrochures() {
+      const query = document.getElementById('search-input').value.toLowerCase().trim();
+      if (!query) {
+        renderBrochures(cachedBrochures);
+        return;
+      }
+
+      const filtered = cachedBrochures.filter(repo => {
+        const nameMatch = repo.name.toLowerCase().includes(query);
+        const descMatch = (repo.description || '').toLowerCase().includes(query);
+        return nameMatch || descMatch;
+      });
+
+      renderBrochures(filtered);
     }
 
     loadBrochures();
